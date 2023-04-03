@@ -86,6 +86,11 @@ pipeline {
         
         stage('Codedeploy Workload') {
             steps {
+                # 기존에 만든 디플로이가 있어서 충돌날때 기존에 디플로이 지우고
+                echo "delete deployment"
+                sh 'aws deploy delete-application --application-name project00'
+                
+                # 새로 만듬
                 echo "create application"
                 sh 'aws deploy create-application --application-name project00'
                
